@@ -1,7 +1,7 @@
 import PageHeader from './components/PageHeader';
 import PageMain from './components/PageMain';
 import PageFooter from './components/PageFooter';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (

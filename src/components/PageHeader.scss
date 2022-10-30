@@ -1,0 +1,38 @@
+@import '../styles/colors.scss';
+
+.page-header {
+  min-height: 25rem;
+  padding: 20px 60px;
+  background-image: url('../images/page-header-bg.jpg');
+  background-size: cover;
+  background-position: center;
+
+  &__panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    padding: 0.625rem 1.125rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $accent;
+    background: rgba(#606060, 0.68);
+    border: 0;
+    border-radius: 0.25rem;
+    transition: $btn-transition;
+    cursor: pointer;
+
+    &:not([disabled]):hover {
+      color: $accent-hover;
+    }
+
+    &[disabled] {
+      background-color: rgb($dark-400, 0.8);
+      cursor: not-allowed;
+    }
+  }
+}
