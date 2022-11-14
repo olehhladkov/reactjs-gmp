@@ -19,3 +19,14 @@ body {
   margin: 0 auto;
   padding: 0 30px;
 }
+
+.page-main {
+  padding: 0 3.75rem;
+  background-color: $dark;
+
+  .results-panel {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 0;
+  }
+}

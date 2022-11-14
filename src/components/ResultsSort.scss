@@ -1,0 +1,14 @@
+@import '../styles/colors.scss';
+
+.results-sort {
+  display: flex;
+  align-items: baseline;
+  gap: 0 1.75rem;
+  margin-left: auto;
+
+  &__label {
+    text-transform: uppercase;
+    color: $light;
+    opacity: 0.6;
+  }
+}

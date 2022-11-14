@@ -1,0 +1,56 @@
+@import '../styles/colors.scss';
+
+.custom-select {
+  position: relative;
+  width: 10rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $light;
+  text-transform: uppercase;
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+    color: inherit;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+
+    &.expanded {
+      .arrow {
+        transform: scale(-1);
+      }
+    }
+  }
+
+  .options {
+    position: absolute;
+    top: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 0.25rem 0.25rem 0.25rem 0;
+    list-style: none;
+
+    &.show {
+      display: flex;
+    }
+  }
+
+  .option {
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+}
