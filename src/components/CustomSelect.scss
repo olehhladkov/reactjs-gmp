@@ -1,11 +1,9 @@
-@import '../styles/colors.scss';
-
 .custom-select {
   position: relative;
   width: 10rem;
   font-size: 1rem;
   font-weight: 500;
-  color: $light;
+  color: var(--light);
   text-transform: uppercase;
 
   .toggle {

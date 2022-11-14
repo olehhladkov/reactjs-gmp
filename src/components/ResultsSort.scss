@@ -1,5 +1,3 @@
-@import '../styles/colors.scss';
-
 .results-sort {
   display: flex;
   align-items: baseline;
@@ -8,7 +6,7 @@
 
   &__label {
     text-transform: uppercase;
-    color: $light;
+    color: var(--light);
     opacity: 0.6;
   }
 }

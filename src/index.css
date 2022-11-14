@@ -1,3 +1,12 @@
+:root {
+  --accent: #f65261;
+  --accent-hover: #f32235;
+  --dark: #232323;
+  --dark-400: #424242;
+  --dark-500: #555;
+  --light: #fff;
+}
+
 *,
 *::before,
 *::after {
@@ -17,6 +26,10 @@ input,
 textarea,
 button {
   font-family: inherit;
+}
+
+button {
+  transition: color 0.15s, background-color 0.15s;
 }
 
 code {
