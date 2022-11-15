@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import MoviesItem from './MoviesItem';
+import MoviesModal from './MoviesModal';
 import './MoviesList.scss';
 
 const moviesData = [
@@ -41,6 +43,16 @@ const moviesData = [
 ];
 
 function MoviesList() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState('add');
+  const [movie, setMovie] = useState({});
+
+  const showMovieModal = (type, movie) => {
+    setModalType(type);
+    setMovie(movie);
+    setModalVisible(true);
+  };
+
   return (
     <div className="movies-wrapper">
       <div className="movies-count">
@@ -51,11 +63,18 @@ function MoviesList() {
         {moviesData.map(movie => {
           return (
             <li className="movies-item" key={movie.title}>
-              <MoviesItem movie={movie} />
+              <MoviesItem movie={movie} showMovieModal={showMovieModal} />
             </li>
           );
         })}
       </ul>
+
+      <MoviesModal
+        show={modalVisible}
+        type={modalType}
+        movie={movie}
+        onClose={() => setModalVisible(false)}
+      />
     </div>
   );
 }

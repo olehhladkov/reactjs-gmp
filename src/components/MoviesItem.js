@@ -1,24 +1,12 @@
 import PropTypes from 'prop-types';
+import MovieContextMenu from './MovieContextMenu';
 
-function MoviesItem({ movie }) {
+function MoviesItem({ movie, showMovieModal }) {
   const { title, genre, release_date, img } = movie;
 
   return (
     <>
-      <div className="context-menu">
-        <button type="button" className="context-menu__btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="44"
-            height="44"
-            fill="none"
-          >
-            <circle cx="22" cy="15" r="2" fill="#fff" />
-            <circle cx="22" cy="22.5" r="2" fill="#fff" />
-            <circle cx="22" cy="30" r="2" fill="#fff" />
-          </svg>
-        </button>
-      </div>
+      <MovieContextMenu movie={movie} showMovieModal={showMovieModal} />
 
       <img
         src={require(`../images/${img}.jpg`)}
@@ -42,6 +30,7 @@ MoviesItem.propTypes = {
     genre: PropTypes.array,
     release_date: PropTypes.number,
   }),
+  showMovieModal: PropTypes.func.isRequired,
 };
 
 export default MoviesItem;

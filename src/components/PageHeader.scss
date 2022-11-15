@@ -5,6 +5,11 @@
   background-size: cover;
   background-position: center;
 
+  &.has-modal {
+    position: relative;
+    z-index: 1;
+  }
+
   &__panel {
     display: flex;
     justify-content: space-between;
