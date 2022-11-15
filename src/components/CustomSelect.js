@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import './CustomSelect.scss';
 
-export default function CustomSelect(params) {
-  const { optionsList, selectedOption, onChange } = params;
+function CustomSelect({ optionsList, selectedOption, onChange }) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
   const toggleOptions = () => {
@@ -52,3 +52,11 @@ export default function CustomSelect(params) {
     </div>
   );
 }
+
+CustomSelect.propTypes = {
+  optionsList: PropTypes.array.isRequired,
+  selectedOption: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default CustomSelect;

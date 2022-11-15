@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function MoviesItem({ movie }) {
   const { title, genre, release_date, img } = movie;
 
@@ -32,5 +34,14 @@ function MoviesItem({ movie }) {
     </>
   );
 }
+
+MoviesItem.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    genre: PropTypes.array,
+    release_date: PropTypes.number,
+  }),
+};
 
 export default MoviesItem;
