@@ -1,5 +1,6 @@
 import ResultsSort from './ResultsSort';
 import GenreToggle from './GenreToggle';
+import MoviesList from './MoviesList';
 
 export default function PageMain() {
   return (
@@ -8,6 +9,8 @@ export default function PageMain() {
         <GenreToggle />
         <ResultsSort />
       </div>
+
+      <MoviesList />
     </main>
   );
 }
