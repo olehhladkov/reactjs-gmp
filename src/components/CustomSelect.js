@@ -36,12 +36,12 @@ export default function CustomSelect(params) {
       </button>
 
       <ul className={`options ${isOptionsOpen ? 'show' : ''}`}>
-        {optionsList.map((option, index) => (
+        {optionsList.map(option => (
           <li
             key={option}
             className={`option ${option === selectedOption ? 'disabled' : ''}`}
             onClick={() => {
-              onChange(index);
+              onChange(option);
               setIsOptionsOpen(false);
             }}
           >

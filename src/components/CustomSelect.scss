@@ -29,14 +29,16 @@
 
   .options {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.25rem);
+    left: -0.25rem;
     display: none;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: calc(100% + 0.25rem);
     margin: 0;
-    padding: 0.25rem 0.25rem 0.25rem 0;
+    padding: 0.25rem;
     list-style: none;
+    background-color: var(--dark-400);
 
     &.show {
       display: flex;
@@ -44,6 +46,7 @@
   }
 
   .option {
+    padding: 0.25rem 0;
     cursor: pointer;
 
     &.disabled {

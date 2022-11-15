@@ -15,17 +15,17 @@ body {
   max-width: 1260px;
   min-height: 100%;
   margin: 0 auto;
-  padding: 0 30px;
-  color: var(--accent-hover);
+  padding: 0 1.875rem;
 }
 
 .page-main {
+  margin-top: 0.625rem;
   padding: 0 3.75rem;
   background-color: var(--dark);
 
   .results-panel {
     display: flex;
     align-items: center;
-    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--dark-400);
   }
 }

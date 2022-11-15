@@ -5,8 +5,7 @@ import './ResultsSort.scss';
 const optionsList = ['release date', 'title', 'rating'];
 
 export default function ResultsSort() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
+  const [selectedOption, setSelectedOption] = useState(optionsList[0]);
 
   return (
     <div className="results-sort">
@@ -14,8 +13,8 @@ export default function ResultsSort() {
 
       <CustomSelect
         optionsList={optionsList}
-        selectedOption={optionsList[selectedIndex]}
-        onChange={index => setSelectedIndex(index)}
+        selectedOption={selectedOption}
+        onChange={option => setSelectedOption(option)}
       />
     </div>
   );
