@@ -1,8 +1,8 @@
 import PageHeader from './components/PageHeader';
 import PageMain from './components/PageMain';
 import PageFooter from './components/PageFooter';
-import ErrorBoundary from './ErrorBoundary';
-import './App.scss';
+import ErrorBoundary from './utils/ErrorBoundary';
+import './styles/App.scss';
 
 function App() {
   return (

@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import { ReactComponent as CloseIcon } from '../images/icons/close-lg.svg';
 
 function MoviesModal({ show, type, movie, onClose }) {
-  const isDeleteModal = type === 'delete';
-
   if (!show) {
     return null;
   }
+
+  const isDeleteModal = type === 'delete';
 
   return (
     <div className="modal-dialog">
@@ -13,19 +14,7 @@ function MoviesModal({ show, type, movie, onClose }) {
 
       <div className="modal-content">
         <button type="button" className="modal-close" onClick={onClose}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            fill="none"
-          >
-            <path
-              stroke="#fff"
-              strokeLinecap="round"
-              strokeWidth="2"
-              d="m1.471 1.154 20.058 20.058M21.529 1.154 1.471 21.212"
-            />
-          </svg>
+          <CloseIcon />
         </button>
         <div className="modal-body">
           <h2 className="modal-title">{type} movie</h2>
@@ -78,7 +67,7 @@ function MoviesModal({ show, type, movie, onClose }) {
                       type="text"
                       id="rating"
                       placeholder="7.8"
-                      defaultValue={movie.rating}
+                      defaultValue={movie.vote_average}
                     />
                   </div>
                 </div>
@@ -140,12 +129,10 @@ MoviesModal.propTypes = {
   movie: PropTypes.oneOfType([
     PropTypes.shape({
       title: PropTypes.string,
-      movie_url: PropTypes.string,
-      genre: PropTypes.array,
+      genres: PropTypes.array,
       release_date: PropTypes.string,
-      rating: PropTypes.string,
-      runtime: PropTypes.string,
-      overview: PropTypes.string,
+      poster_path: PropTypes.string,
+      vote_average: PropTypes.number,
     }),
     PropTypes.object,
   ]),

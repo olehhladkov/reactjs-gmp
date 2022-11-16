@@ -1,4 +1,4 @@
-import './SearchForm.scss';
+import '../styles/SearchForm.scss';
 
 function SearchForm() {
   return (

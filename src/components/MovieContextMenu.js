@@ -1,5 +1,7 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { ReactComponent as CloseIcon } from '../images/icons/close.svg';
+import { ReactComponent as DotsIcon } from '../images/icons/dots.svg';
 
 function MovieContextMenu({ movie, showMovieModal }) {
   const [expanded, setExpanded] = useState(false);
@@ -11,31 +13,7 @@ function MovieContextMenu({ movie, showMovieModal }) {
         className="context-menu__btn"
         onClick={() => setExpanded(!expanded)}
       >
-        {expanded ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="13"
-            fill="none"
-          >
-            <path
-              stroke="#fff"
-              strokeLinecap="round"
-              d="m1.097 1.595 9.806 10.029M10.903 1.595 1.097 11.624"
-            />
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="44"
-            height="44"
-            fill="none"
-          >
-            <circle cx="22" cy="15" r="2" fill="#fff" />
-            <circle cx="22" cy="22.5" r="2" fill="#fff" />
-            <circle cx="22" cy="30" r="2" fill="#fff" />
-          </svg>
-        )}
+        {expanded ? <CloseIcon /> : <DotsIcon />}
       </button>
 
       <ul className="list">
@@ -44,13 +22,7 @@ function MovieContextMenu({ movie, showMovieModal }) {
             type="button"
             className="list-btn"
             onClick={() => {
-              showMovieModal('edit', {
-                ...movie,
-                overview: `Moana Waialiki is a sea voyaging enthusiast and the only daughter of a chief in a long line of navigators.`,
-                movie_url: 'https://www.moana.com',
-                rating: 7.6,
-                runtime: '1h 47min',
-              });
+              showMovieModal('edit', movie);
               setExpanded(false);
             }}
           >
@@ -77,9 +49,9 @@ function MovieContextMenu({ movie, showMovieModal }) {
 MovieContextMenu.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    genre: PropTypes.array,
-    release_date: PropTypes.number,
+    genres: PropTypes.array,
+    release_date: PropTypes.string,
+    poster_path: PropTypes.string.isRequired,
   }),
   showMovieModal: PropTypes.func.isRequired,
 };

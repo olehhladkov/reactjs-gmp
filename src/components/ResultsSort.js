@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CustomSelect from './CustomSelect';
-import './ResultsSort.scss';
+import '../styles/ResultsSort.scss';
 
 const optionsList = ['release date', 'title', 'rating'];
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import SearchForm from './SearchForm';
 import MoviesModal from './MoviesModal';
-import logo from '../logo.svg';
-import './PageHeader.scss';
+import logo from '../images/logo.svg';
+import '../styles/PageHeader.scss';
 
 export default function PageHeader() {
   const [modalVisible, setModalVisible] = useState(false);
