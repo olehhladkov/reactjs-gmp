@@ -1,35 +1,18 @@
-import { useState } from 'react';
-import SearchForm from './SearchForm';
-import MoviesModal from './MoviesModal';
 import logo from '../images/logo.svg';
 import '../styles/PageHeader.scss';
 
-export default function PageHeader() {
-  const [modalVisible, setModalVisible] = useState(false);
-
+export default function PageHeader({ headerBtn, children }) {
   return (
-    <header className={`page-header ${modalVisible ? 'has-modal' : ''}`}>
+    <header className="page-header">
       <div className="page-header__panel">
         <a href="/">
           <img src={logo} alt="Netflix roulette" />
         </a>
-        <button
-          type="button"
-          className="btn"
-          onClick={() => setModalVisible(true)}
-        >
-          + Add movie
-        </button>
+
+        {headerBtn}
       </div>
 
-      <SearchForm />
-
-      <MoviesModal
-        show={modalVisible}
-        type="add"
-        movie={{}}
-        onClose={() => setModalVisible(false)}
-      />
+      {children}
     </header>
   );
 }

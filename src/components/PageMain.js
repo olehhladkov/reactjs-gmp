@@ -1,8 +1,7 @@
 import ResultsSort from './ResultsSort';
 import GenreToggle from './GenreToggle';
-import MoviesList from './MoviesList';
 
-export default function PageMain() {
+export default function PageMain({ moviesList }) {
   return (
     <main className="page-main">
       <div className="results-panel">
@@ -10,7 +9,7 @@ export default function PageMain() {
         <ResultsSort />
       </div>
 
-      <MoviesList />
+      {moviesList}
     </main>
   );
 }

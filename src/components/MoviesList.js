@@ -1,44 +1,32 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 import MoviesItem from './MoviesItem';
-import MoviesModal from './MoviesModal';
+import MovieContextMenu from './MovieContextMenu';
 import moviesData from '../api/movies.json';
 import '../styles/MoviesList.scss';
 
-function MoviesList() {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalType, setModalType] = useState('add');
-  const [movie, setMovie] = useState({});
-
-  const showMovieModal = (type, movie) => {
-    setModalType(type);
-    setMovie(movie);
-    setModalVisible(true);
-  };
-
+function MoviesList({ showMovieModal }) {
   return (
     <div className="movies-wrapper">
       <div className="movies-count">
-        <strong>39</strong> movies found
+        <strong>{moviesData.length}</strong> movies found
       </div>
 
       <ul className="movies-list">
         {moviesData.map(movie => {
           return (
             <li className="movies-item" key={movie.title}>
-              <MoviesItem movie={movie} showMovieModal={showMovieModal} />
+              <MovieContextMenu movie={movie} showMovieModal={showMovieModal} />
+              <MoviesItem movie={movie}></MoviesItem>
             </li>
           );
         })}
       </ul>
-
-      <MoviesModal
-        show={modalVisible}
-        type={modalType}
-        movie={movie}
-        onClose={() => setModalVisible(false)}
-      />
     </div>
   );
 }
+
+MoviesList.propTypes = {
+  showMovieModal: PropTypes.func.isRequired,
+};
 
 export default MoviesList;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { ReactComponent as CloseIcon } from '../images/icons/close-lg.svg';
 
-function MoviesModal({ show, type, movie, onClose }) {
+function MoviesModal({ show, type, movie = {}, onClose }) {
   if (!show) {
     return null;
   }
