@@ -4,7 +4,7 @@ import MovieContextMenu from './MovieContextMenu';
 import moviesData from '../api/movies.json';
 import '../styles/MoviesList.scss';
 
-function MoviesList({ showMovieModal }) {
+function MoviesList({ showMovieModal, handleMovieClick }) {
   return (
     <div className="movies-wrapper">
       <div className="movies-count">
@@ -16,7 +16,7 @@ function MoviesList({ showMovieModal }) {
           return (
             <li className="movies-item" key={movie.title}>
               <MovieContextMenu movie={movie} showMovieModal={showMovieModal} />
-              <MoviesItem movie={movie}></MoviesItem>
+              <MoviesItem movie={movie} handleMovieClick={handleMovieClick} />
             </li>
           );
         })}
@@ -27,6 +27,7 @@ function MoviesList({ showMovieModal }) {
 
 MoviesList.propTypes = {
   showMovieModal: PropTypes.func.isRequired,
+  handleMovieClick: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

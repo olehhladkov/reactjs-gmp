@@ -34,7 +34,7 @@ function MovieContextMenu({ movie, showMovieModal }) {
             type="button"
             className="list-btn"
             onClick={() => {
-              showMovieModal('delete');
+              showMovieModal('delete', movie);
               setExpanded(false);
             }}
           >

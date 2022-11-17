@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
 
-function MoviesItem({ movie, children }) {
+function MoviesItem({ movie, handleMovieClick, children }) {
   const { title, genres, release_date, poster_path } = movie;
 
   return (
     <>
-      <img src={poster_path} alt={title} width="320" height="455" />
+      <img
+        src={poster_path}
+        alt={title}
+        width="320"
+        height="455"
+        onClick={() => handleMovieClick(movie)}
+      />
       <div className="movies-item__body">
         <h2 className="movies-item__title">{title}</h2>
         <div className="movies-item__date">{release_date.split('-')[0]}</div>
@@ -24,6 +30,7 @@ MoviesItem.propTypes = {
     release_date: PropTypes.string,
     poster_path: PropTypes.string.isRequired,
   }),
+  handleMovieClick: PropTypes.func.isRequired,
 };
 
 export default MoviesItem;
