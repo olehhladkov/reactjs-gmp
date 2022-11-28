@@ -7,7 +7,6 @@ import MovieDetails from './components/MovieDetails';
 import MoviesList from './components/MoviesList';
 import MoviesModal from './components/MoviesModal';
 import ErrorBoundary from './utils/ErrorBoundary';
-import { ReactComponent as SearchIcon } from './images/icons/search.svg';
 import './styles/App.scss';
 
 function App() {
@@ -20,34 +19,25 @@ function App() {
     setIsModalVisible(true);
   };
 
-  const handleHeaderBtnClick = () => {
+  const toggleMovieDetailsMode = () => {
     return isMovieDetailsMode
       ? setIsMovieDetailsMode(false)
       : showMovieModal('add');
   };
 
-  const handleMovieClick = movie => {
+  const movieClickHandler = movie => {
     setIsMovieDetailsMode(true);
     setMovieDetails({ ...movieDetails, data: movie });
   };
-
-  const headerBtn = (
-    <button
-      type="button"
-      className={`${isMovieDetailsMode ? 'btn-link' : 'btn'}`}
-      onClick={handleHeaderBtnClick}
-    >
-      {isMovieDetailsMode ? <SearchIcon /> : <span>+ Add movie</span>}
-    </button>
-  );
 
   return (
     <div className="page">
       <ErrorBoundary>
         <PageHeader
           className="page-header"
-          headerBtn={headerBtn}
           hasBackground={!isMovieDetailsMode}
+          isMovieDetailsMode={isMovieDetailsMode}
+          toggleMovieDetailsMode={toggleMovieDetailsMode}
         >
           {isMovieDetailsMode ? (
             <MovieDetails movie={movieDetails.data} />
@@ -55,24 +45,18 @@ function App() {
             <SearchForm />
           )}
         </PageHeader>
-      </ErrorBoundary>
 
-      <ErrorBoundary>
         <PageMain
           moviesList={
             <MoviesList
               showMovieModal={showMovieModal}
-              handleMovieClick={handleMovieClick}
+              movieClickHandler={movieClickHandler}
             />
           }
         />
-      </ErrorBoundary>
 
-      <ErrorBoundary>
         <PageFooter className="page-footer" />
-      </ErrorBoundary>
 
-      <ErrorBoundary>
         <MoviesModal
           show={isModalVisible}
           type={movieDetails.type}
