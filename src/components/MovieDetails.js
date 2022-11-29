@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { formatToTimeString } from '../utils/formatToTimeString';
 import '../styles/MovieDetails.scss';
 
@@ -12,10 +13,19 @@ function MovieDetails({ movie }) {
     runtime,
     overview,
   } = movie;
+  const [imgSrc, setImgSrc] = useState(poster_path);
+
+  const onError = () => setImgSrc('https://via.placeholder.com/320x455');
 
   return (
     <div className="movie-details">
-      <img src={poster_path} alt={title} width="320" height="455" />
+      <img
+        src={imgSrc}
+        alt={title}
+        onError={onError}
+        width="320"
+        height="455"
+      />
 
       <div className="movie-details__content">
         <div className="movie-details__heading">
