@@ -1,20 +1,32 @@
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import CustomSelect from './CustomSelect';
+import { getMoviesThunk, setSortBy } from '../app/appSlice';
 import '../styles/ResultsSort.scss';
 
-const optionsList = ['release date', 'title', 'rating'];
-
 export default function ResultsSort() {
-  const [selectedOption, setSelectedOption] = useState(optionsList[0]);
+  const sortByList = useSelector(state => state.app.sortByList);
+  const filterBy = useSelector(state => state.app.filterBy);
+  const sortBy = useSelector(state => state.app.sortBy);
+
+  const dispatch = useDispatch();
+
+  const applySort = sortBy => {
+    dispatch(setSortBy(sortBy));
+    dispatch(
+      getMoviesThunk(
+        `?filter=${filterBy}&sortBy=${sortBy.value}&sortOrder=desc`
+      )
+    );
+  };
 
   return (
     <div className="results-sort">
       <span className="results-sort__label">sort by</span>
 
       <CustomSelect
-        optionsList={optionsList}
-        selectedOption={selectedOption}
-        onChange={option => setSelectedOption(option)}
+        optionsList={sortByList}
+        selectedOption={sortBy}
+        onChange={option => applySort(option)}
       />
     </div>
   );

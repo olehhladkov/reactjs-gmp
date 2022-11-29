@@ -17,22 +17,24 @@ function CustomSelect({ optionsList, selectedOption, onChange }) {
         className={`toggle ${isOptionsOpen ? 'expanded' : ''}`}
         onClick={toggleOptions}
       >
-        {selectedOption}
+        {selectedOption.name}
 
         <ArrowIcon />
       </button>
 
       <ul className={`options ${isOptionsOpen ? 'show' : ''}`}>
-        {optionsList.map(option => (
+        {optionsList.map(({ name, value }) => (
           <li
-            key={option}
-            className={`option ${option === selectedOption ? 'disabled' : ''}`}
+            key={value}
+            className={`option ${
+              value === selectedOption.value ? 'disabled' : ''
+            }`}
             onClick={() => {
-              onChange(option);
+              onChange({ name, value });
               setIsOptionsOpen(false);
             }}
           >
-            {option}
+            {name}
           </li>
         ))}
       </ul>
@@ -42,7 +44,7 @@ function CustomSelect({ optionsList, selectedOption, onChange }) {
 
 CustomSelect.propTypes = {
   optionsList: PropTypes.array.isRequired,
-  selectedOption: PropTypes.string.isRequired,
+  selectedOption: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
