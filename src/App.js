@@ -25,7 +25,7 @@ function App() {
       : showMovieModal('add');
   };
 
-  const movieClickHandler = movie => {
+  const showMovieDetails = movie => {
     setIsMovieDetailsMode(true);
     setMovieDetails({ ...movieDetails, data: movie });
   };
@@ -50,7 +50,7 @@ function App() {
           moviesList={
             <MoviesList
               showMovieModal={showMovieModal}
-              movieClickHandler={movieClickHandler}
+              showMovieDetails={showMovieDetails}
             />
           }
         />

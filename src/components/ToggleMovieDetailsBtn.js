@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '../images/icons/search.svg';
 
-export default function HeaderBtn({
+export default function ToggleMovieDetailsBtn({
   isMovieDetailsMode,
   toggleMovieDetailsMode,
 }) {
@@ -16,7 +16,7 @@ export default function HeaderBtn({
   );
 }
 
-HeaderBtn.propTypes = {
+ToggleMovieDetailsBtn.propTypes = {
   isMovieDetailsMode: PropTypes.bool.isRequired,
   toggleMovieDetailsMode: PropTypes.func.isRequired,
 };

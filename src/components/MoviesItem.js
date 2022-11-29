@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function MoviesItem({ movie, movieClickHandler, children }) {
+function MoviesItem({ movie, showMovieDetails, children }) {
   const { title, genres, release_date, poster_path } = movie;
 
   return (
@@ -10,7 +10,7 @@ function MoviesItem({ movie, movieClickHandler, children }) {
         alt={title}
         width="320"
         height="455"
-        onClick={() => movieClickHandler(movie)}
+        onClick={() => showMovieDetails(movie)}
       />
       <div className="movies-item__body">
         <h2 className="movies-item__title">{title}</h2>
@@ -30,7 +30,7 @@ MoviesItem.propTypes = {
     release_date: PropTypes.string,
     poster_path: PropTypes.string.isRequired,
   }),
-  movieClickHandler: PropTypes.func.isRequired,
+  showMovieDetails: PropTypes.func.isRequired,
 };
 
 export default MoviesItem;

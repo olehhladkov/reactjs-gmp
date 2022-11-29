@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import HeaderBtn from './HeaderBtn';
+import ToggleMovieDetailsBtn from './ToggleMovieDetailsBtn';
 import logo from '../images/logo.svg';
 import '../styles/PageHeader.scss';
 
@@ -16,7 +16,7 @@ export default function PageHeader({
           <img src={logo} alt="Netflix roulette" />
         </a>
 
-        <HeaderBtn
+        <ToggleMovieDetailsBtn
           isMovieDetailsMode={isMovieDetailsMode}
           toggleMovieDetailsMode={toggleMovieDetailsMode}
         />
