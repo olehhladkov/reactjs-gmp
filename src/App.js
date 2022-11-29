@@ -1,23 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import PageHeader from './components/PageHeader';
+import PageMain from './components/PageMain';
+import PageFooter from './components/PageFooter';
+import SearchForm from './components/SearchForm';
+import MovieDetails from './components/MovieDetails';
+import MoviesList from './components/MoviesList';
+import MoviesModal from './components/MoviesModal';
+import ErrorBoundary from './utils/ErrorBoundary';
+import './styles/App.scss';
 
 function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isMovieDetailsMode, setIsMovieDetailsMode] = useState(false);
+  const [movieDetails, setMovieDetails] = useState({ type: 'add', data: {} });
+
+  const showMovieModal = (type, movieData) => {
+    setMovieDetails({ type, data: movieData });
+    setIsModalVisible(true);
+  };
+
+  const toggleMovieDetailsMode = () => {
+    return isMovieDetailsMode
+      ? setIsMovieDetailsMode(false)
+      : showMovieModal('add');
+  };
+
+  const showMovieDetails = movie => {
+    setIsMovieDetailsMode(true);
+    setMovieDetails({ ...movieDetails, data: movie });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="page">
+      <ErrorBoundary>
+        <PageHeader
+          className="page-header"
+          hasBackground={!isMovieDetailsMode}
+          isMovieDetailsMode={isMovieDetailsMode}
+          toggleMovieDetailsMode={toggleMovieDetailsMode}
         >
-          Learn React
-        </a>
-      </header>
+          {isMovieDetailsMode ? (
+            <MovieDetails movie={movieDetails.data} />
+          ) : (
+            <SearchForm />
+          )}
+        </PageHeader>
+
+        <PageMain
+          moviesList={
+            <MoviesList
+              showMovieModal={showMovieModal}
+              showMovieDetails={showMovieDetails}
+            />
+          }
+        />
+
+        <PageFooter className="page-footer" />
+
+        <MoviesModal
+          show={isModalVisible}
+          type={movieDetails.type}
+          movie={movieDetails.data}
+          onClose={() => setIsModalVisible(false)}
+        />
+      </ErrorBoundary>
     </div>
   );
 }

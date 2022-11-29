@@ -1,0 +1,129 @@
+.movies-wrapper {
+  margin-top: 1.5rem;
+  color: var(--light);
+}
+
+.movies-count {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem calc(calc(100% - 60rem) / 2);
+  margin: 0;
+  padding: 0 0 5rem;
+  list-style: none;
+}
+
+.movies-item {
+  position: relative;
+  flex-basis: 20rem;
+
+  &:hover {
+    .context-menu {
+      opacity: 1;
+    }
+  }
+
+  &__body {
+    position: relative;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+    padding-right: 3rem;
+    font-size: 1.125rem;
+  }
+
+  &__date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.15rem 0.25rem;
+    font-size: 0.875rem;
+    border: 1px solid;
+    border-radius: 0.25rem;
+  }
+
+  &__genre {
+    font-size: 0.875rem;
+  }
+
+  .context-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transition: opacity 0.15s;
+
+    &.expanded {
+      width: 12rem;
+      border-radius: 0.25rem 0.25rem 0 0;
+      background-color: var(--dark-400);
+
+      .context-menu__btn {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: auto;
+      }
+
+      .list {
+        display: block;
+      }
+    }
+
+    &__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background-color: var(--dark-400);
+      cursor: pointer;
+    }
+
+    .list {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 0 0.25rem 0.25rem;
+      list-style: none;
+      background-color: var(--dark-400);
+    }
+
+    .list-item {
+      &:last-child {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .list-btn {
+      width: 100%;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+      color: var(--light);
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--accent);
+      }
+    }
+  }
+}

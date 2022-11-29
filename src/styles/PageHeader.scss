@@ -1,0 +1,51 @@
+.page-header {
+  min-height: 25rem;
+  padding: 1.25rem 3.75rem;
+  background-color: var(--dark);
+  background-size: cover;
+  background-position: center;
+
+  &.has-background {
+    background-image: url('../images/page-header-bg.jpg');
+  }
+
+  &__panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    padding: 0.625rem 1.125rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(#606060, 0.68);
+    border: 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &:not([disabled]):hover {
+      color: var(--accent-hover);
+    }
+
+    &[disabled] {
+      background-color: var(--dark-400);
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-link {
+    padding: 0;
+    color: var(--accent);
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:not([disabled]):hover {
+      color: var(--accent-hover);
+    }
+  }
+}
