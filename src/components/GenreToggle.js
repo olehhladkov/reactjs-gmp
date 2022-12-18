@@ -1,28 +1,44 @@
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getMoviesThunk, setFilterOption } from '../app/appSlice';
 import '../styles/GenreToggle.scss';
 
-const genreList = ['all', 'documentary', 'comedy', 'horror', 'crime'];
-
 function GenreToggle() {
-  const [activeGenre, setActiveGenre] = useState(genreList[0]);
+  const filterOptionList = useSelector((state) => state.app.filterOptionList);
+  const filterOptionSelected = useSelector(
+    (state) => state.app.filterOptionSelected
+  );
+  const sortOptionSelected = useSelector(
+    (state) => state.app.sortOptionSelected
+  );
+
+  const dispatch = useDispatch();
+
+  const applyFilter = (filterOption) => {
+    dispatch(setFilterOption(filterOption));
+    dispatch(
+      getMoviesThunk(
+        `?filter=${filterOption}&sortBy=${sortOptionSelected.value}`
+      )
+    );
+  };
 
   return (
     <ul className="genre-toggle">
-      {genreList.map(genre => {
+      {filterOptionList.map((genre) => {
         return (
           <li
             key={genre}
             className={`genre-toggle__item ${
-              genre === activeGenre ? 'active' : ''
+              genre === filterOptionSelected ? 'active' : ''
             }`}
           >
             <button
               className="genre-toggle__btn"
               type="button"
-              disabled={genre === activeGenre}
-              onClick={() => setActiveGenre(genre)}
+              disabled={genre === filterOptionSelected}
+              onClick={() => applyFilter(genre)}
             >
-              {genre}
+              {genre || 'All'}
             </button>
           </li>
         );

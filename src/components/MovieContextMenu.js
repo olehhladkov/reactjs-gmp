@@ -51,7 +51,10 @@ MovieContextMenu.propTypes = {
     title: PropTypes.string.isRequired,
     genres: PropTypes.array,
     release_date: PropTypes.string,
-    poster_path: PropTypes.string.isRequired,
+    poster_path: PropTypes.oneOfType([
+      PropTypes.string.isRequired,
+      PropTypes.number.isRequired,
+    ]),
   }),
   showMovieModal: PropTypes.func.isRequired,
 };

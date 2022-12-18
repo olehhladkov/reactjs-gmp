@@ -1,16 +1,21 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 function MoviesItem({ movie, showMovieDetails, children }) {
   const { title, genres, release_date, poster_path } = movie;
+  const [imgSrc, setImgSrc] = useState(poster_path);
+
+  const setDefaultImg = () => setImgSrc('https://via.placeholder.com/320x455');
 
   return (
     <>
       <img
-        src={poster_path}
+        src={imgSrc}
         alt={title}
         width="320"
         height="455"
         onClick={() => showMovieDetails(movie)}
+        onError={setDefaultImg}
       />
       <div className="movies-item__body">
         <h2 className="movies-item__title">{title}</h2>
@@ -28,7 +33,10 @@ MoviesItem.propTypes = {
     title: PropTypes.string.isRequired,
     genres: PropTypes.array,
     release_date: PropTypes.string,
-    poster_path: PropTypes.string.isRequired,
+    poster_path: PropTypes.oneOfType([
+      PropTypes.string.isRequired,
+      PropTypes.number.isRequired,
+    ]),
   }),
   showMovieDetails: PropTypes.func.isRequired,
 };
