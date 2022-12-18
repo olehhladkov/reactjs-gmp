@@ -5,7 +5,7 @@ function MoviesItem({ movie, showMovieDetails, children }) {
   const { title, genres, release_date, poster_path } = movie;
   const [imgSrc, setImgSrc] = useState(poster_path);
 
-  const onError = () => setImgSrc('https://via.placeholder.com/320x455');
+  const setDefaultImg = () => setImgSrc('https://via.placeholder.com/320x455');
 
   return (
     <>
@@ -15,7 +15,7 @@ function MoviesItem({ movie, showMovieDetails, children }) {
         width="320"
         height="455"
         onClick={() => showMovieDetails(movie)}
-        onError={onError}
+        onError={setDefaultImg}
       />
       <div className="movies-item__body">
         <h2 className="movies-item__title">{title}</h2>

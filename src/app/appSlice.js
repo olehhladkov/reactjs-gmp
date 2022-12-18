@@ -7,29 +7,29 @@ export const appSlice = createSlice({
   name: 'app',
   initialState: {
     moviesList: [],
-    filterByList: ['', 'comedy', 'crime', 'documentary', 'drama', 'horror'],
-    sortByList: [
+    filterOptionList: ['', 'comedy', 'crime', 'documentary', 'drama', 'horror'],
+    sortOptionList: [
       { name: 'release date', value: 'release_date' },
       { name: 'rating', value: 'vote_average' },
     ],
-    sortBy: { name: 'release date', value: 'release_date' },
-    filterBy: '',
+    sortOptionSelected: { name: 'release date', value: 'release_date' },
+    filterOptionSelected: '',
   },
   reducers: {
-    setSortBy: (state, action) => {
-      state.sortBy = action.payload;
+    setSortOption: (state, action) => {
+      state.sortOptionSelected = action.payload;
     },
-    setFilterBy: (state, action) => {
-      state.filterBy = action.payload;
+    setFilterOption: (state, action) => {
+      state.filterOptionSelected = action.payload;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder.addCase(getMoviesThunk.fulfilled, (state, action) => {
       state.moviesList = action.payload.data;
     });
   },
 });
 
-export const { setSortBy, setFilterBy } = appSlice.actions;
+export const { setSortOption, setFilterOption } = appSlice.actions;
 
 export default appSlice.reducer;

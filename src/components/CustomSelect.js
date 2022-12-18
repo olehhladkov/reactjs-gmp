@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ReactComponent as ArrowIcon } from '../images/icons/arrow.svg';
 import '../styles/CustomSelect.scss';
 
-function CustomSelect({ optionsList, selectedOption, onChange }) {
+function CustomSelect({ optionsList, selectedOption, selectOption }) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
   const toggleOptions = () => {
@@ -30,7 +30,7 @@ function CustomSelect({ optionsList, selectedOption, onChange }) {
               value === selectedOption.value ? 'disabled' : ''
             }`}
             onClick={() => {
-              onChange({ name, value });
+              selectOption({ name, value });
               setIsOptionsOpen(false);
             }}
           >
@@ -45,7 +45,7 @@ function CustomSelect({ optionsList, selectedOption, onChange }) {
 CustomSelect.propTypes = {
   optionsList: PropTypes.array.isRequired,
   selectedOption: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
+  selectOption: PropTypes.func.isRequired,
 };
 
 export default CustomSelect;

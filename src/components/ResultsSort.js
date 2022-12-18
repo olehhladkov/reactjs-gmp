@@ -1,20 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
 import CustomSelect from './CustomSelect';
-import { getMoviesThunk, setSortBy } from '../app/appSlice';
+import { getMoviesThunk, setSortOption } from '../app/appSlice';
 import '../styles/ResultsSort.scss';
 
 export default function ResultsSort() {
-  const sortByList = useSelector(state => state.app.sortByList);
-  const filterBy = useSelector(state => state.app.filterBy);
-  const sortBy = useSelector(state => state.app.sortBy);
+  const sortOptionList = useSelector(state => state.app.sortOptionList);
+  const filterOptionSelected = useSelector(state => state.app.filterOptionSelected);
+  const sortOptionSelected = useSelector(state => state.app.sortOptionSelected);
 
   const dispatch = useDispatch();
 
-  const applySort = sortBy => {
-    dispatch(setSortBy(sortBy));
+  const applySort = sortOption => {
+    dispatch(setSortOption(sortOption));
     dispatch(
       getMoviesThunk(
-        `?filter=${filterBy}&sortBy=${sortBy.value}&sortOrder=desc`
+        `?filter=${filterOptionSelected}&sortBy=${sortOption.value}&sortOrder=desc`
       )
     );
   };
@@ -24,9 +24,9 @@ export default function ResultsSort() {
       <span className="results-sort__label">sort by</span>
 
       <CustomSelect
-        optionsList={sortByList}
-        selectedOption={sortBy}
-        onChange={option => applySort(option)}
+        optionsList={sortOptionList}
+        selectedOption={sortOptionSelected}
+        selectOption={option => applySort(option)}
       />
     </div>
   );

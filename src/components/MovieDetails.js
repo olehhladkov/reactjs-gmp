@@ -15,14 +15,14 @@ function MovieDetails({ movie }) {
   } = movie;
   const [imgSrc, setImgSrc] = useState(poster_path);
 
-  const onError = () => setImgSrc('https://via.placeholder.com/320x455');
+  const setDefaultImg = () => setImgSrc('https://via.placeholder.com/320x455');
 
   return (
     <div className="movie-details">
       <img
         src={imgSrc}
         alt={title}
-        onError={onError}
+        onError={setDefaultImg}
         width="320"
         height="455"
       />
