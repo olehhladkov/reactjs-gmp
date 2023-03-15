@@ -1,12 +1,24 @@
 import PropTypes from 'prop-types';
+import deleteMovie from '../api/deleteMovie';
+import { useDispatch } from 'react-redux';
+import { getMoviesThunk } from '../app/appSlice';
 import { ReactComponent as CloseIcon } from '../images/icons/close-lg.svg';
 
 function MoviesModal({ show, type, movie = {}, onClose }) {
+  const dispatch = useDispatch();
+
   if (!show) {
     return null;
   }
 
   const isDeleteModal = type === 'delete';
+
+  const onMovieDelete = async (id) => {
+    await deleteMovie(id);
+    await dispatch(getMoviesThunk());
+
+    onClose();
+  }
 
   return (
     <div className="modal-dialog">
@@ -25,7 +37,12 @@ function MoviesModal({ show, type, movie = {}, onClose }) {
                 <p>Are you sure you want to delete this movie?</p>
 
                 <div className="actions">
-                  <button className="btn">Confirm</button>
+                  <button 
+                    className="btn"
+                    onClick={() => onMovieDelete(movie.id)}
+                  >
+                    Confirm
+                  </button>
                 </div>
               </>
             ) : (
