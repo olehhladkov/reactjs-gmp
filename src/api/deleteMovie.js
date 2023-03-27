@@ -1,6 +1,6 @@
 import { BASE_URL } from '../utils/constants';
 
-export default async (id) => {
+const deleteMovie = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
 
@@ -9,3 +9,5 @@ export default async (id) => {
     throw error;
   }
 };
+
+export default deleteMovie;

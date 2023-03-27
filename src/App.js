@@ -62,6 +62,7 @@ function App() {
           type={movieDetails.type}
           movie={movieDetails.data}
           onClose={() => setIsModalVisible(false)}
+          onMovieDelete={() => setIsModalVisible(false)}
         />
       </ErrorBoundary>
     </div>

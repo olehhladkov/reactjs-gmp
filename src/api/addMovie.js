@@ -1,6 +1,6 @@
 import { BASE_URL } from '../utils/constants';
 
-export default async (payload) => {
+const addMovie = async (payload) => {
   try {
     const method = payload.id ? 'PUT' : 'POST';
     const response = await fetch(BASE_URL, {
@@ -14,3 +14,5 @@ export default async (payload) => {
     throw error;
   }
 };
+
+export default addMovie;

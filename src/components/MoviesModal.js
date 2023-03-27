@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getMoviesThunk } from '../app/appSlice';
 import { ReactComponent as CloseIcon } from '../images/icons/close-lg.svg';
 
-function MoviesModal({ show, type, movie = {}, onClose }) {
+function MoviesModal({ show, type, movie = {}, onClose, onMovieDelete }) {
   const dispatch = useDispatch();
 
   if (!show) {
@@ -14,11 +14,11 @@ function MoviesModal({ show, type, movie = {}, onClose }) {
 
   const isDeleteModal = type === 'delete';
 
-  const onMovieDelete = async (id) => {
+  const handleMovieDelete = async (id) => {
     await deleteMovie(id);
     await dispatch(getMoviesThunk());
 
-    onClose();
+    onMovieDelete();
   };
 
   return (
@@ -40,7 +40,7 @@ function MoviesModal({ show, type, movie = {}, onClose }) {
                 <div className="actions">
                   <button
                     className="btn"
-                    onClick={() => onMovieDelete(movie.id)}
+                    onClick={() => handleMovieDelete(movie.id)}
                   >
                     Confirm
                   </button>

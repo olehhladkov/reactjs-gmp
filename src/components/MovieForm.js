@@ -60,6 +60,8 @@ function MovieForm({ movie, afterSubmitHandler }) {
     },
   });
 
+  const maxDate = new Date().toISOString().slice(0, 10);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="form-row">
@@ -79,7 +81,8 @@ function MovieForm({ movie, afterSubmitHandler }) {
         <div className="form-col">
           <label htmlFor="release_date">release date</label>
           <input
-            type="text"
+            type="date"
+            max={maxDate}
             id="release_date"
             placeholder="Enter a date"
             onChange={formik.handleChange}

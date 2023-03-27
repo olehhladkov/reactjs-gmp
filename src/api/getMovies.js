@@ -1,6 +1,6 @@
 import { BASE_URL } from '../utils/constants';
 
-export default async (searchParams = '', thunkAPI, options) => {
+const getMovies = async (searchParams = '', thunkAPI, options) => {
   try {
     const response = await fetch(`${BASE_URL}${searchParams}`, {
       ...options,
@@ -13,3 +13,5 @@ export default async (searchParams = '', thunkAPI, options) => {
     throw error;
   }
 };
+
+export default getMovies;
