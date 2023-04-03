@@ -6,10 +6,11 @@ import MovieContextMenu from './MovieContextMenu';
 import { getMoviesThunk } from '../app/appSlice';
 import '../styles/MoviesList.scss';
 
-function MoviesList({ showMovieModal, showMovieDetails }) {
+function MoviesList({ showMovieModal }) {
+  const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     let promise;
@@ -29,7 +30,7 @@ function MoviesList({ showMovieModal, showMovieDetails }) {
     };
   }, [dispatch]);
 
-  const moviesList = useSelector(state => state.app.moviesList);
+  const moviesList = useSelector((state) => state.app.moviesList);
   const showMoviesList = !isLoading && moviesList?.length > 0;
   const showNotFoundMessage = !isLoading && moviesList?.length === 0;
   const showErrorMessage = !isLoading && error;
@@ -48,17 +49,14 @@ function MoviesList({ showMovieModal, showMovieDetails }) {
           </div>
 
           <ul className="movies-list">
-            {moviesList.map(movie => {
+            {moviesList.map((movie) => {
               return (
                 <li className="movies-item" key={movie.id}>
                   <MovieContextMenu
                     movie={movie}
                     showMovieModal={showMovieModal}
                   />
-                  <MoviesItem
-                    movie={movie}
-                    showMovieDetails={showMovieDetails}
-                  />
+                  <MoviesItem movie={movie} />
                 </li>
               );
             })}
@@ -71,7 +69,6 @@ function MoviesList({ showMovieModal, showMovieDetails }) {
 
 MoviesList.propTypes = {
   showMovieModal: PropTypes.func.isRequired,
-  showMovieDetails: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

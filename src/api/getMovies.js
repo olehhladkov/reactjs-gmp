@@ -1,10 +1,18 @@
 import { BASE_URL } from '../utils/constants';
 
-const getMovies = async (searchParams = '', thunkAPI, options) => {
+export const getMovies = async (searchFields = {}, signal, options) => {
   try {
-    const response = await fetch(`${BASE_URL}${searchParams}`, {
+    const searchParams = new URLSearchParams(searchFields);
+    searchParams.append('searchBy', 'title');
+
+    if (searchParams.has('genre')) {
+      searchParams.append('filter', searchParams.get('genre'));
+      searchParams.delete('genre');
+    }
+
+    const response = await fetch(`${BASE_URL}?${searchParams.toString()}`, {
       ...options,
-      signal: thunkAPI.signal,
+      signal,
     });
     const data = await response.json();
 
@@ -14,4 +22,15 @@ const getMovies = async (searchParams = '', thunkAPI, options) => {
   }
 };
 
-export default getMovies;
+export const getMovieById = async (id, options) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      ...options,
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

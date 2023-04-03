@@ -1,35 +1,54 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getMovies from '../api/getMovies';
+import { getMovies, getMovieById } from '../api/getMovies';
 
-export const getMoviesThunk = createAsyncThunk('app', getMovies);
+export const getMoviesThunk = createAsyncThunk(
+  'getMovies',
+  async (arg, { getState, signal }) => {
+    const {
+      app: { searchFields },
+    } = getState();
+
+    const data = await getMovies(searchFields, signal);
+
+    return data;
+  }
+);
+export const getMovieByIdThunk = createAsyncThunk('getMovieById', getMovieById);
 
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
+    searchFields: {
+      sortBy: 'vote_average',
+      sortOrder: 'desc',
+    },
     moviesList: [],
+    currentMovie: {},
     filterOptionList: ['', 'comedy', 'crime', 'documentary', 'drama', 'horror'],
     sortOptionList: [
       { name: 'release date', value: 'release_date' },
-      { name: 'rating', value: 'vote_average' },
+      { name: 'name', value: 'name' },
     ],
-    sortOptionSelected: { name: 'release date', value: 'release_date' },
-    filterOptionSelected: '',
   },
   reducers: {
-    setSortOption: (state, action) => {
-      state.sortOptionSelected = action.payload;
-    },
-    setFilterOption: (state, action) => {
-      state.filterOptionSelected = action.payload;
+    setSearchFields: (state, action) => {
+      state.searchFields = {
+        ...state.searchFields,
+        ...action.payload,
+      };
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getMoviesThunk.fulfilled, (state, action) => {
-      state.moviesList = action.payload.data;
-    });
+    builder
+      .addCase(getMoviesThunk.fulfilled, (state, action) => {
+        state.moviesList = action.payload.data;
+      })
+      .addCase(getMovieByIdThunk.fulfilled, (state, action) => {
+        state.currentMovie = action.payload;
+      });
   },
 });
 
-export const { setSortOption, setFilterOption } = appSlice.actions;
+export const { setSearchFields } = appSlice.actions;
 
 export default appSlice.reducer;

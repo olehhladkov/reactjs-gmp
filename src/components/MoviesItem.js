@@ -1,11 +1,21 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { defaultPosterPath } from '../utils/constants';
 
-function MoviesItem({ movie, showMovieDetails, children }) {
+function MoviesItem({ movie }) {
   const { title, genres, release_date, poster_path } = movie;
-  const [imgSrc, setImgSrc] = useState(poster_path);
 
-  const setDefaultImg = () => setImgSrc('https://via.placeholder.com/320x455');
+  const [imgSrc, setImgSrc] = useState(poster_path);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const showMovieDetails = () => {
+    searchParams.set('movie', movie.id)
+    setSearchParams(searchParams);
+
+    window.scroll(0, 0);
+  };
+  const setDefaultImg = () => setImgSrc(defaultPosterPath);
 
   return (
     <>
@@ -14,7 +24,7 @@ function MoviesItem({ movie, showMovieDetails, children }) {
         alt={title}
         width="320"
         height="455"
-        onClick={() => showMovieDetails(movie)}
+        onClick={showMovieDetails}
         onError={setDefaultImg}
       />
       <div className="movies-item__body">
@@ -22,8 +32,6 @@ function MoviesItem({ movie, showMovieDetails, children }) {
         <div className="movies-item__date">{release_date.split('-')[0]}</div>
         <div className="movies-item__genre">{genres.join(', ')}</div>
       </div>
-
-      {children}
     </>
   );
 }
@@ -38,7 +46,6 @@ MoviesItem.propTypes = {
       PropTypes.number.isRequired,
     ]),
   }),
-  showMovieDetails: PropTypes.func.isRequired,
 };
 
 export default MoviesItem;

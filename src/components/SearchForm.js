@@ -1,19 +1,43 @@
 import { useFormik } from 'formik';
-import { getMoviesThunk } from '../app/appSlice';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { getMoviesThunk, setSearchFields } from '../app/appSlice';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import '../styles/SearchForm.scss';
 
 function SearchForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { searchQuery = '' } = useParams();
+  const [searchParams] = useSearchParams();
 
   const formik = useFormik({
     initialValues: {
-      search: '',
+      search: searchQuery,
     },
     onSubmit: async () => {
-      await dispatch(
-        getMoviesThunk(`?searchBy=title&search=${formik.values.search}`)
+      await dispatch(setSearchFields({ search: formik.values.search }));
+      await dispatch(getMoviesThunk());
+
+      const searchFields = Array.from(searchParams).reduce(
+        (acc, [key, value]) => {
+          if (value) {
+            acc[key] = value;
+          }
+
+          return acc;
+        },
+        {}
+      );
+
+      const searchQueryString = new URLSearchParams(searchFields).toString();
+
+      navigate(
+        `/search/${formik.values.search}${
+          searchQueryString.length ? `?${searchQueryString}` : ''
+        }`
       );
     },
   });

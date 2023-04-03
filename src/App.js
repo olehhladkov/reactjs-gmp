@@ -1,70 +1,31 @@
-import { useState } from 'react';
-import PageHeader from './components/PageHeader';
-import PageMain from './components/PageMain';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Search from './pages/Search';
+import NotFound from './pages/NotFound';
 import PageFooter from './components/PageFooter';
-import SearchForm from './components/SearchForm';
-import MovieDetails from './components/MovieDetails';
-import MoviesList from './components/MoviesList';
-import MoviesModal from './components/MoviesModal';
-import ErrorBoundary from './utils/ErrorBoundary';
 import './styles/App.scss';
 
 function App() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isMovieDetailsMode, setIsMovieDetailsMode] = useState(false);
-  const [movieDetails, setMovieDetails] = useState({ type: 'add', data: {} });
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const showMovieModal = (type, movieData) => {
-    setMovieDetails({ type, data: movieData });
-    setIsModalVisible(true);
-  };
-
-  const toggleMovieDetailsMode = () => {
-    return isMovieDetailsMode
-      ? setIsMovieDetailsMode(false)
-      : showMovieModal('add');
-  };
-
-  const showMovieDetails = movie => {
-    setIsMovieDetailsMode(true);
-    setMovieDetails({ ...movieDetails, data: movie });
-  };
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('search');
+    }
+  }, [location, navigate]);
 
   return (
     <div className="page">
-      <ErrorBoundary>
-        <PageHeader
-          className="page-header"
-          hasBackground={!isMovieDetailsMode}
-          isMovieDetailsMode={isMovieDetailsMode}
-          toggleMovieDetailsMode={toggleMovieDetailsMode}
-        >
-          {isMovieDetailsMode ? (
-            <MovieDetails movie={movieDetails.data} />
-          ) : (
-            <SearchForm />
-          )}
-        </PageHeader>
-
-        <PageMain
-          moviesList={
-            <MoviesList
-              showMovieModal={showMovieModal}
-              showMovieDetails={showMovieDetails}
-            />
-          }
+      <Routes>
+        <Route
+          path="search/:searchQuery?"
+          element={<Search showMovieModal={() => showMovieModal('add')} />}
         />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
-        <PageFooter className="page-footer" />
-
-        <MoviesModal
-          show={isModalVisible}
-          type={movieDetails.type}
-          movie={movieDetails.data}
-          onClose={() => setIsModalVisible(false)}
-          onMovieDelete={() => setIsModalVisible(false)}
-        />
-      </ErrorBoundary>
+      <PageFooter className="page-footer" />
     </div>
   );
 }
