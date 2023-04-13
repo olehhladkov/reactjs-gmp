@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenreToggle renders correctly 1`] = `
+<ul
+  class="genre-toggle"
+>
+  <li
+    class="genre-toggle__item active"
+  >
+    <button
+      class="genre-toggle__btn"
+      disabled=""
+      type="button"
+    >
+      All
+    </button>
+  </li>
+  <li
+    class="genre-toggle__item "
+  >
+    <button
+      class="genre-toggle__btn"
+      type="button"
+    >
+      comedy
+    </button>
+  </li>
+  <li
+    class="genre-toggle__item "
+  >
+    <button
+      class="genre-toggle__btn"
+      type="button"
+    >
+      crime
+    </button>
+  </li>
+  <li
+    class="genre-toggle__item "
+  >
+    <button
+      class="genre-toggle__btn"
+      type="button"
+    >
+      documentary
+    </button>
+  </li>
+  <li
+    class="genre-toggle__item "
+  >
+    <button
+      class="genre-toggle__btn"
+      type="button"
+    >
+      drama
+    </button>
+  </li>
+  <li
+    class="genre-toggle__item "
+  >
+    <button
+      class="genre-toggle__btn"
+      type="button"
+    >
+      horror
+    </button>
+  </li>
+</ul>
+`;
